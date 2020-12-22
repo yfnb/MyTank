@@ -82,6 +82,7 @@ public class TankFrame extends Frame {
                     break;
             }
             setMainDir();
+            //dsafsdfdaf
         }
         private void setMainDir() {
             tank.setMainDir(bDown,bUp,bLeft,bRight);
