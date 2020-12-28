@@ -1,2 +1,2 @@
-#tanks count at initialization
-initTankCount=10
+#tanks count at initialization  设计模式分支
+initTankCount=5

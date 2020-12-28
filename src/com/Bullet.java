@@ -7,7 +7,7 @@ public class Bullet {
     private int x;
     private int y;
     private static int SPEED = 8;
-    private TankFrame tf;
+    private TankFrame tf=TankFrame.getInstance();
     private Dir dir;
     private boolean living = true;
     private Group group;
@@ -18,12 +18,11 @@ public class Bullet {
  //   Rectangle rect2 = new Rectangle(x, y, Tank.WIDTH, Tank.HEIGHT);
 
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
         tf.rectangles.add(rect1);
 
     }

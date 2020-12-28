@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Frame frame = new TankFrame();
+        Frame frame = TankFrame.getInstance();
 
         Integer initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
         for (int i = 1; i <= initTankCount; i++) {

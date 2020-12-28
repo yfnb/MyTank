@@ -24,9 +24,14 @@ public class TankFrame extends Frame {
 
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private static TankFrame tf=new TankFrame();
 
 
-    public TankFrame() throws HeadlessException {
+    public static TankFrame getInstance(){
+        return tf;
+    }
+
+    private TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
         setTitle("tank war");

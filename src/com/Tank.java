@@ -1,7 +1,6 @@
 package com;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Tank {
 
@@ -17,6 +16,8 @@ public class Tank {
     Rectangle rect2 = new Rectangle(x, y, Tank.WIDTH, Tank.HEIGHT);
 
     private boolean living = true;
+    FireStrategy defaultFireStrategy =new DefaultFireStrategy();
+    FourDirFireStrategy fourDirFireStrategy=new FourDirFireStrategy();
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
@@ -168,20 +169,26 @@ public class Tank {
 
     public void fire() {
 
+
         if (group.equals(Group.BAD)) {
 
             int random = (int) (Math.random() * 30);
 
-
             if (random != 8) {
                 return;
             }
-
         }
 
-        tf.bullets.add(new Bullet(x, y, dir, group, tf));
-    }
+        if(group.equals(Group.BAD)){
+            defaultFireStrategy.fire(this);
+        }else {
+            fourDirFireStrategy.fire(this);
+        }
 
+
+
+
+    }
 
     public void die() {
 
