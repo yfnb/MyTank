@@ -1,8 +1,10 @@
 package com;
 
+import gameFactory.BaseBullet;
+
 import java.awt.*;
 
-public class Bullet {
+public class BulletTwo extends BaseBullet {
 
     private int x;
     private int y;
@@ -18,7 +20,7 @@ public class Bullet {
  //   Rectangle rect2 = new Rectangle(x, y, Tank.WIDTH, Tank.HEIGHT);
 
 
-    public Bullet(int x, int y, Dir dir, Group group) {
+    public BulletTwo(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -59,6 +61,7 @@ public class Bullet {
         this.dir = dir;
     }
 
+    @Override
     public void paint(Graphics g) {
         this.g=g;
         int x1; //子弹的实际为止，从坦克的中心位置打出；
@@ -69,21 +72,25 @@ public class Bullet {
 
         x1 = x + ResourceMgr.tankWidth / 2 - ResourceMgr.bulletWidth / 2;
 
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, WIDTH, HEIGHT);
+        g.setColor(c);
 
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x1, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x1, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x1, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x1, y, null);
-                break;
-        }
+//        switch (dir) {
+//            case LEFT:
+//                g.drawImage(ResourceMgr.bulletL, x1, y, null);
+//                break;
+//            case RIGHT:
+//                g.drawImage(ResourceMgr.bulletR, x1, y, null);
+//                break;
+//            case UP:
+//                g.drawImage(ResourceMgr.bulletU, x1, y, null);
+//                break;
+//            case DOWN:
+//                g.drawImage(ResourceMgr.bulletD, x1, y, null);
+//                break;
+//        }
 
         move();
     }
@@ -115,7 +122,7 @@ public class Bullet {
     }
 
 
-    public void collideWide(Tank tank) {
+    public void collideWide(TankOne tank) {
            rect1.setBounds(x,y,WIDTH,HEIGHT);
 
          //  rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);

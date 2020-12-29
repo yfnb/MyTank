@@ -1,8 +1,10 @@
 package com;
 
+import gameFactory.BaseTank;
+
 import java.awt.*;
 
-public class Tank {
+public class TankOne extends BaseTank {
 
     private int x;
     private int y;
@@ -13,13 +15,13 @@ public class Tank {
     private Group group;
     public static int WIDTH = ResourceMgr.tankD.getWidth();
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
-    Rectangle rect2 = new Rectangle(x, y, Tank.WIDTH, Tank.HEIGHT);
+    Rectangle rect2 = new Rectangle(x, y, TankOne.WIDTH, TankOne.HEIGHT);
 
     private boolean living = true;
     FireStrategy defaultFireStrategy =new DefaultFireStrategy();
     FourDirFireStrategy fourDirFireStrategy=new FourDirFireStrategy();
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public TankOne(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -27,6 +29,7 @@ public class Tank {
         this.group = group;
         tf.rectangles.add(rect2);
     }
+
 
     public Rectangle getRect2() {
         return rect2;
@@ -39,43 +42,18 @@ public class Tank {
     public Group getGroup() {
         return group;
     }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
+    @Override
     public void paint(Graphics g) {
+
+        if (group.equals(Group.GOOD)){
+            System.out.println("坦克的位置x="+x+",y="+y);
+
+        }
 
         if (!living) {
             tf.tanks.remove(this);
+
+            System.out.println("////////////////////////////");
             return;
         }
 
@@ -110,16 +88,16 @@ public class Tank {
 
         }
 
-        if(x>TankFrame.GAME_WIDTH-Tank.WIDTH){
+        if(x>TankFrame.GAME_WIDTH- TankOne.WIDTH){
             dir=Dir.LEFT;
         }
         if(x<0){
             dir=Dir.RIGHT;
         }
-        if(y>TankFrame.GAME_HEIGHT-Tank.WIDTH){
+        if(y>TankFrame.GAME_HEIGHT- TankOne.WIDTH){
             dir=Dir.UP;
         }
-        if(y<Tank.WIDTH/2){
+        if(y< TankOne.WIDTH/2){
             dir=Dir.DOWN;
         }
 
@@ -142,13 +120,22 @@ public class Tank {
 
 
         if (!moving) {
+            System.out.println("没有移动指示");
             return;
         }
+        System.out.println("可以移动");
 
         move();
     }
 
-    private void move() {
+    public void move() {
+        if(group.equals(Group.GOOD)){
+            System.out.println("打印移动的地方");
+            System.out.println("sdasddasda"+dir);
+        }
+
+
+
         switch (dir) {
             case UP:
                 y -= SPEED;
@@ -194,5 +181,15 @@ public class Tank {
 
         living = false;
 
+    }
+
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        System.out.println("方向是"+dir);
+        this.dir = dir;
     }
 }

@@ -1,5 +1,7 @@
 package com;
 
+import gameFactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,22 +14,35 @@ public class TankFrame extends Frame {
 
     public static int GAME_WIDTH = 800;
     public static int GAME_HEIGHT = 600;
-    ArrayList<Rectangle> rectangles=new ArrayList<Rectangle>();
-    ArrayList<Explode> explodes=new ArrayList<Explode>();
+    ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+    ArrayList<Explode> explodes = new ArrayList<Explode>();
 
-    Tank myTank = new Tank(100, 100, Dir.DOWN, Group.GOOD, this);
-
-    ArrayList<Tank> tanks = new ArrayList<Tank>();
-
-
+    private static TankFrame tf = new TankFrame();
+    ArrayList<BulletOne> bullets = null;
+    BaseTank myTank = null;
 
 
+    ArrayList<TankOne> tanks = null;
+    Graphics g =null;
 
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    private static TankFrame tf=new TankFrame();
+    {
+
+        //使用工厂来创建坦克
 
 
-    public static TankFrame getInstance(){
+        GameFactory gameFactory = new TwoSkinFactory();
+      //  myTank = gameFactory.getTank(100, 100, Dir.DOWN, Group.GOOD, this);
+
+        myTank = new TankOne(100, 100, Dir.DOWN, Group.GOOD, this);
+
+
+        tanks = new ArrayList<TankOne>();
+
+        bullets = new ArrayList<BulletOne>();
+
+    }
+
+    public static TankFrame getInstance() {
         return tf;
     }
 
@@ -43,6 +58,7 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+
     }
 
     @Override
@@ -95,6 +111,7 @@ public class TankFrame extends Frame {
         gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
+        this.g=g;
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -127,7 +144,7 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            myTank.setMoving(false);
+            myTank.setMoving(true);
             int key = e.getKeyCode();
             switch (key) {
                 case KeyEvent.VK_LEFT:
@@ -147,14 +164,16 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            setMainTankDir();
+        //    setMainTankDir();
         }
 
         private void setMainTankDir() {
             if (bDown || bUp || bLeft || bRight) {
                 myTank.setMoving(true);
+                System.out.println("******************************");
             } else {
                 myTank.setMoving(false);
+                return;
             }
 
             if (bDown) {
@@ -169,6 +188,8 @@ public class TankFrame extends Frame {
             if (bRight) {
                 myTank.setDir(Dir.RIGHT);
             }
+      //      myTank.setDir(Dir.LEFT);
+            myTank.move();
         }
     }
 }

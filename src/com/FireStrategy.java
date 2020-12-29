@@ -1,6 +1,8 @@
 package com;
 
+import gameFactory.BaseTank;
+
 public interface FireStrategy {
 
-    void fire(Tank tank);
+    void fire(BaseTank tank);
 }

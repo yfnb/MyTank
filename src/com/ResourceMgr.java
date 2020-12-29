@@ -11,7 +11,7 @@ public class ResourceMgr {
 
 
 
-     public static    BufferedImage tankL,tankD,tankU,tankR;
+     public static    BufferedImage tankL,tankD,tankU,tankR,tank2;
      public static    BufferedImage bulletL,bulletD,bulletU,bulletR;
      public static int tankWidth=0;
      public static int bulletWidth=0;
@@ -26,6 +26,9 @@ public class ResourceMgr {
             tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
             tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
             tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
+            tank2 = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank2.png"));
+
+
 
             bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
             bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
