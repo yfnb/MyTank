@@ -1,6 +1,6 @@
 package com;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
+import util.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,19 +8,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResourceMgr {
+    public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
+    public static BufferedImage badTankL, badTankU, badTankR, badTankD;
 
 
-
-     public static    BufferedImage tankL,tankD,tankU,tankR,tank2;
-     public static    BufferedImage bulletL,bulletD,bulletU,bulletR;
-     public static int tankWidth=0;
-     public static int bulletWidth=0;
-     public static ArrayList<BufferedImage> explodes=new ArrayList<>(16);
-
-
+    public static BufferedImage tankL, tankD, tankU, tankR, tank2;
+    public static BufferedImage goodBulletL, goodBulletD, goodBulletU, goodBulletR;
+    public static BufferedImage badBulletL, badBulletD, badBulletU, badBulletR;
+    public static int tankWidth = 0;
+    public static int bulletWidth = 0;
+    public static ArrayList<BufferedImage> explodes = new ArrayList<>(16);
 
 
-      static  {
+    static {
         try {
             tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
             tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
@@ -29,25 +29,43 @@ public class ResourceMgr {
             tank2 = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank2.png"));
 
 
+            //faaf
+            goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+            goodTankL = ImageUtil.rotateImage(goodTankU, -90);
+            goodTankR = ImageUtil.rotateImage(goodTankU, 90);
+            goodTankD = ImageUtil.rotateImage(goodTankU, 180);
 
-            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
-            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
-            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
-            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            badTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            badTankL = ImageUtil.rotateImage(badTankU, -90);
+            badTankR = ImageUtil.rotateImage(badTankU, 90);
+            badTankD = ImageUtil.rotateImage(badTankU, 180);
 
-            tankWidth=tankD.getWidth();
+
+            goodBulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            goodBulletL = ImageUtil.rotateImage(goodBulletU, -90);
+            goodBulletR = ImageUtil.rotateImage(goodBulletU, 90);
+            goodBulletD = ImageUtil.rotateImage(goodBulletU, 180);
+
+
+            badBulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
+            badBulletL = ImageUtil.rotateImage(badBulletU, -90);
+            badBulletR = ImageUtil.rotateImage(badBulletU, 90);
+            badBulletD = ImageUtil.rotateImage(badBulletU, 180);
+
+
+            tankWidth = tankD.getWidth();
             System.out.println(tankWidth);
-            bulletWidth=bulletD.getWidth();
+            bulletWidth = goodBulletD.getWidth();
             System.out.println(bulletWidth);
 
 
             //爆炸图片加载
-            for (int i = 1; i <=16 ; i++) {
-                explodes.add(ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+i+".gif"))) ;
+            for (int i = 1; i <= 16; i++) {
+                explodes.add(ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + i + ".gif")));
 
             }
 
-            System.out.println("爆炸图片数量"+explodes.size());
+            System.out.println("爆炸图片数量" + explodes.size());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,11 +73,6 @@ public class ResourceMgr {
 
 
     }
-
-
-
-
-
 
 
 }

@@ -14,15 +14,15 @@ public class TankFrame extends Frame {
 
     public static int GAME_WIDTH = 800;
     public static int GAME_HEIGHT = 600;
-    ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
-    ArrayList<Explode> explodes = new ArrayList<Explode>();
+   public ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+   public ArrayList<Explode> explodes = new ArrayList<Explode>();
 
     private static TankFrame tf = new TankFrame();
-    ArrayList<BulletOne> bullets = null;
+    public  ArrayList<BaseBullet> bullets = null;
     BaseTank myTank = null;
 
 
-    ArrayList<TankOne> tanks = null;
+    public ArrayList<BaseTank> tanks = null;
     Graphics g =null;
 
     {
@@ -30,15 +30,16 @@ public class TankFrame extends Frame {
         //使用工厂来创建坦克
 
 
-        GameFactory gameFactory = new TwoSkinFactory();
-      //  myTank = gameFactory.getTank(100, 100, Dir.DOWN, Group.GOOD, this);
 
-        myTank = new TankOne(100, 100, Dir.DOWN, Group.GOOD, this);
+        myTank = OneSkinFactory.getInstance().getTank(100, 100, Dir.DOWN, Group.GOOD, this);
+
+      //  myTank = new TankOne(100, 100, Dir.DOWN, Group.GOOD, this);
 
 
-        tanks = new ArrayList<TankOne>();
 
-        bullets = new ArrayList<BulletOne>();
+        tanks = new ArrayList<BaseTank>();
+
+        bullets = new ArrayList<BaseBullet>();
 
     }
 
@@ -144,7 +145,7 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            myTank.setMoving(true);
+            myTank.setMoving(false);
             int key = e.getKeyCode();
             switch (key) {
                 case KeyEvent.VK_LEFT:
@@ -170,7 +171,6 @@ public class TankFrame extends Frame {
         private void setMainTankDir() {
             if (bDown || bUp || bLeft || bRight) {
                 myTank.setMoving(true);
-                System.out.println("******************************");
             } else {
                 myTank.setMoving(false);
                 return;

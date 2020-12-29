@@ -1,6 +1,9 @@
 package com;
 
+import gameFactory.BaseBullet;
 import gameFactory.BaseTank;
+import gameFactory.OneSkinFactory;
+import gameFactory.TwoSkinFactory;
 
 public class FourDirFireStrategy implements FireStrategy {
 
@@ -8,7 +11,8 @@ public class FourDirFireStrategy implements FireStrategy {
     public void fire(BaseTank tank) {
         Dir[] values = Dir.values();
         for (int i = 0; i <values.length ; i++) {
-            TankFrame.getInstance().bullets.add(new BulletOne(tank.getX(), tank.getY(),values[i], tank.getGroup()));
+            BaseBullet bullet = TwoSkinFactory.getInstance().getBullet(tank.getX(), tank.getY(), values[i], tank.getGroup());
+            TankFrame.getInstance().bullets.add(bullet);
         }
 
     }
