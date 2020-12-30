@@ -13,8 +13,8 @@ public class TwoSkinFactory extends GameFactory{
     }
 
     @Override
-    public BaseTank getTank(int x, int y, Dir dir, Group group, TankFrame tf) {
-        return new TankTwo(x,y,dir,group,tf);
+    public BaseTank getTank(int x, int y, Dir dir, Group group, GameModel gm) {
+        return new TankTwo(x,y,dir,group,gm);
     }
 
     @Override

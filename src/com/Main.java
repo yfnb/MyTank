@@ -19,13 +19,11 @@ public class Main {
             int y=(int)(Math.random()*TankFrame.GAME_HEIGHT);
 
             TwoSkinFactory twoSkinFactory=TwoSkinFactory.getInstance();
-            baseTank=   twoSkinFactory.getTank(x,y,Dir.DOWN,Group.BAD, (TankFrame) frame);
+            baseTank=   twoSkinFactory.getTank(x,y,Dir.DOWN,Group.BAD,GameModel.getInstance());
 
-            ((TankFrame) frame).tanks.add(baseTank);
+           GameModel.getInstance().tanks.add(baseTank);
 
         }
-
-
 
 
         while(true) {

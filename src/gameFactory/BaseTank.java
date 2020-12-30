@@ -11,7 +11,6 @@ public abstract class BaseTank {
     private static int SPEED = 5;
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
-    private TankFrame tf = null;
     private Group group;
     public static int WIDTH = ResourceMgr.tankD.getWidth();
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
@@ -21,13 +20,15 @@ public abstract class BaseTank {
     FireStrategy defaultFireStrategy = new DefaultFireStrategy();
     FourDirFireStrategy fourDirFireStrategy = new FourDirFireStrategy();
 
-    public BaseTank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    private GameModel gm=GameModel.getInstance();
+
+    public BaseTank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
-        tf.rectangles.add(rect2);
+        gm.rectangles.add(rect2);
     }
 
 
@@ -47,7 +48,7 @@ public abstract class BaseTank {
 
 
         if (!living) {
-            tf.tanks.remove(this);
+            gm.tanks.remove(this);
 
             return;
         }

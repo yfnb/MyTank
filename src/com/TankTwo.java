@@ -7,8 +7,8 @@ import java.awt.*;
 public class TankTwo extends BaseTank {
 
 
-    public TankTwo(int x, int y, Dir dir, Group group, TankFrame tf) {
-        super(x, y, dir, group, tf);
+    public TankTwo(int x, int y, Dir dir, Group group, GameModel gm) {
+        super(x, y, dir, group, gm);
     }
 
     @Override

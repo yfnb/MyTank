@@ -8,7 +8,7 @@ public abstract class BaseBullet {
     private int x;
     private int y;
     private static int SPEED = 8;
-    private TankFrame tf=TankFrame.getInstance();
+    private GameModel gm=GameModel.getInstance();
     private Dir dir;
     private boolean living = true;
     private Group group;
@@ -24,7 +24,7 @@ public abstract class BaseBullet {
         this.y = y;
         this.dir = dir;
         this.group = group;
-        tf.rectangles.add(rect1);
+        gm.rectangles.add(rect1);
 
     }
 
@@ -65,7 +65,7 @@ public abstract class BaseBullet {
         this.g=g;
         int x1; //子弹的实际为止，从坦克的中心位置打出；
         if (!living) {
-            tf.bullets.remove(this);
+            gm.bullets.remove(this);
         }
 
 
@@ -114,7 +114,7 @@ public abstract class BaseBullet {
 
         }
 
-        if (x < 0 || y < 0 || x > tf.GAME_WIDTH || y > tf.GAME_HEIGHT) {
+        if (x < 0 || y < 0 || x > gm.GAME_WIDTH || y > gm.GAME_HEIGHT) {
             living = false;
         }
 
@@ -135,8 +135,8 @@ public abstract class BaseBullet {
         if (rect1.intersects(rect2)) {
             tank.die();
             this.die();
-            Explode ex=new Explode(x,y,tf);
-            tf.explodes.add(ex);
+            Explode ex=new Explode(x,y,gm);
+            gm.explodes.add(ex);
             ex.paint(g);
 
 

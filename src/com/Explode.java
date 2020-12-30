@@ -11,11 +11,12 @@ public class Explode {
     private TankFrame tf;
     int index=0;
 
+    private GameModel gm;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
