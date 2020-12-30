@@ -13,12 +13,12 @@ public class Explode {
     private TankFrame tf;
     int index=0;
 
-    private GameModel gm;
 
-    public Explode(int x, int y, GameModel gm) {
+
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
+
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 

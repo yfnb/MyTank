@@ -1,7 +1,7 @@
 package test;
 
 public abstract class Tools {
-    public String name="C";
+    public String name = "C";
 
     public Tools() {
         System.out.println("父类也创建出来了");

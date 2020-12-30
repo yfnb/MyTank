@@ -7,6 +7,6 @@ public class Main {
         System.out.println(tools.getName());
         tools.setName("7");
         System.out.println(tools.getName());
-        System.out.println(tools.geName());
+        System.out.println("********"+tools.geName());
     }
 }

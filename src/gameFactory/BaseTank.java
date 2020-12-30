@@ -5,17 +5,13 @@ import util.ResourceMgr;
 
 import java.awt.*;
 
-public abstract class BaseTank {
-
-    private int x;
-    private int y;
+public abstract class BaseTank  extends GameObject{
     private static int SPEED = 5;
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
-    private Group group;
-    public static int WIDTH = ResourceMgr.tankD.getWidth();
-    public static int HEIGHT = ResourceMgr.tankD.getHeight();
-    Rectangle rect2 = new Rectangle(x, y, TankOne.WIDTH, TankOne.HEIGHT);
+    private int oldX;
+    private int oldY;
+
 
     private boolean living = true;
     FireStrategy defaultFireStrategy = new DefaultFireStrategy();
@@ -24,39 +20,33 @@ public abstract class BaseTank {
     private GameModel gm=GameModel.getInstance();
 
     public BaseTank(int x, int y, Dir dir, Group group, GameModel gm) {
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
         this.dir = dir;
         this.gm = gm;
-        this.group = group;
-        gm.rectangles.add(rect2);
+        setGroup(group);
+        setHEIGHT(ResourceMgr.tankD.getHeight());
+        setWIDTH(ResourceMgr.tankD.getWidth());
     }
 
 
-    public Rectangle getRect2() {
-        return rect2;
-    }
 
-    public void setRect2(Rectangle rect2) {
-        this.rect2 = rect2;
-    }
 
-    public Group getGroup() {
-        return group;
-    }
 
+    @Override
     public void paint(Graphics g) {
 
 
         if (!living) {
-            gm.tanks.remove(this);
-
+            gm.getObjects().remove(this);
             return;
         }
 
         //如果是敌方坦克，则方向随机
-        if (group.equals(Group.BAD)) {
+        if (getGroup().equals(Group.BAD)) {
             moving = true;
+
+            fire();
 
 
             double random = Math.random();
@@ -84,16 +74,16 @@ public abstract class BaseTank {
 
         }
 
-        if (x > TankFrame.GAME_WIDTH - TankOne.WIDTH) {
+        if (getX() > TankFrame.GAME_WIDTH - getWIDTH()) {
             dir = Dir.LEFT;
         }
-        if (x < 0) {
+        if (getX() < 0) {
             dir = Dir.RIGHT;
         }
-        if (y > TankFrame.GAME_HEIGHT - TankOne.WIDTH) {
+        if (getY() > TankFrame.GAME_HEIGHT - getHEIGHT()) {
             dir = Dir.UP;
         }
-        if (y < TankOne.WIDTH / 2) {
+        if (getY() < getWIDTH() / 2) {
             dir = Dir.DOWN;
         }
 
@@ -105,12 +95,30 @@ public abstract class BaseTank {
 
             return;
         }
-
-
+        oldX=getX();
+        oldY=getY();
         move();
     }
 
+    public int getOldX() {
+        return oldX;
+    }
+
+    public void setOldX(int oldX) {
+        this.oldX = oldX;
+    }
+
+    public int getOldY() {
+        return oldY;
+    }
+
+    public void setOldY(int oldY) {
+        this.oldY = oldY;
+    }
+
     public void getTankPhoto(Graphics g) {
+        int x=getX();
+        int y=getY();
         switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.goodTankL, x, y, null);
@@ -129,18 +137,19 @@ public abstract class BaseTank {
 
     public void move() {
 
+
         switch (dir) {
             case UP:
-                y -= SPEED;
+                setY(getY()-SPEED);
                 break;
             case DOWN:
-                y += SPEED;
+                setY(getY()+SPEED);
                 break;
             case LEFT:
-                x -= SPEED;
+                setX(getX()-SPEED);
                 break;
             case RIGHT:
-                x += SPEED;
+                setX(getX()+SPEED);
             default:
                 break;
         }
@@ -149,8 +158,7 @@ public abstract class BaseTank {
 
     public void fire() {
 
-
-        if (group.equals(Group.BAD)) {
+        if (getGroup().equals(Group.BAD)) {
 
             int random = (int) (Math.random() * 30);
 
@@ -159,7 +167,8 @@ public abstract class BaseTank {
             }
         }
 
-        if (group.equals(Group.BAD)) {
+        if (getGroup().equals(Group.BAD)) {
+
             defaultFireStrategy.fire(this);
         } else {
             fourDirFireStrategy.fire(this);
@@ -182,26 +191,6 @@ public abstract class BaseTank {
     public void setDir(Dir dir) {
 
         this.dir = dir;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 
     public boolean isLiving() {

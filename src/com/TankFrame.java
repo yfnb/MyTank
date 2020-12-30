@@ -12,7 +12,7 @@ public class TankFrame extends Frame {
     private static TankFrame tf = new TankFrame();
 
     private  GameModel gameModel=GameModel.getInstance();
-    Graphics g =null;
+   public Graphics g =null;
     Image offScreenImage = null;
 
     public static int GAME_WIDTH = 800;
@@ -39,15 +39,12 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        this.g=g;
         Color c = g.getColor();
         g.setColor(Color.white);
-        g.drawString("子弹的数量：" + gameModel.getBullets().size(), 10, 60);
-        g.drawString("敌人的数量：" + gameModel.getTanks().size(), 10, 80);
-        g.drawString("碰撞模型对象的数量：" + gameModel.getRectangles().size(), 10, 100);
-        g.drawString("屏幕上的爆炸数：" + gameModel.getExplodes().size(), 10, 120);
-        g.setColor(c);
-        gameModel.getMyTank().paint(g);
 
+        g.drawString("object的数量：" + gameModel.getObjects().size(), 10, 60);
+        g.setColor(c);
         gameModel.paint(g);
 
     }
@@ -97,6 +94,10 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
+            if(gameModel.getMyTank()==null){
+                return;
+            }
+
             gameModel.getMyTank().setMoving(false);
             int key = e.getKeyCode();
             switch (key) {
@@ -117,7 +118,6 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-        //    setMainTankDir();
         }
 
         private void setMainTankDir() {
