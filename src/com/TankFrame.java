@@ -7,25 +7,21 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 public class TankFrame extends Frame {
     private static TankFrame tf = new TankFrame();
 
-    private static GameModel gameModel=GameModel.getInstance();
+    private  GameModel gameModel=GameModel.getInstance();
     Graphics g =null;
     Image offScreenImage = null;
 
     public static int GAME_WIDTH = 800;
     public static int GAME_HEIGHT = 600;
 
-    public static BaseTank myTank=gameModel.getMyTank();
-
-
+    public  BaseTank myTank=gameModel.getMyTank();
     public static TankFrame getInstance() {
         return tf;
     }
-
     private TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(true);

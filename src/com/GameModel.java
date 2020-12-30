@@ -3,6 +3,8 @@ package com;
 import gameFactory.BaseBullet;
 import gameFactory.BaseTank;
 import gameFactory.OneSkinFactory;
+import gameFactory.TwoSkinFactory;
+import util.PropertyMgr;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,6 +33,24 @@ public class GameModel {
         tanks = new ArrayList<BaseTank>();
 
         bullets = new ArrayList<BaseBullet>();
+
+
+        Integer initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
+
+        BaseTank baseTank=null;
+        for (int i = 1; i <= initTankCount; i++) {
+
+            int x=  (int)(Math.random()*TankFrame.GAME_WIDTH);
+            int y=(int)(Math.random()*TankFrame.GAME_HEIGHT);
+
+            TwoSkinFactory twoSkinFactory=TwoSkinFactory.getInstance();
+            baseTank=   twoSkinFactory.getTank(x,y,Dir.DOWN,Group.BAD,this);
+
+            tanks.add(baseTank);
+
+        }
+
+
 
     }
 

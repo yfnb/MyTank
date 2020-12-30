@@ -1,6 +1,7 @@
 package com;
 
 import gameFactory.BaseBullet;
+import util.ResourceMgr;
 
 import java.awt.*;
 

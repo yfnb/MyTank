@@ -1,4 +1,4 @@
-package com;
+package util;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -26,4 +26,6 @@ public class PropertyMgr {
 		System.out.println(PropertyMgr.get("initTankCount"));
 		
 	}
+
+
 }

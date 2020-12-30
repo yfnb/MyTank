@@ -1,6 +1,7 @@
 package com;
 
 import gameFactory.BaseTank;
+import util.ResourceMgr;
 
 import java.awt.*;
 

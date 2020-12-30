@@ -1,5 +1,7 @@
 package com;
 
+import util.ResourceMgr;
+
 import java.awt.*;
 
 public class Explode {

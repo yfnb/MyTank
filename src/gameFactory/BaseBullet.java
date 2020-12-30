@@ -1,6 +1,7 @@
 package gameFactory;
 
 import com.*;
+import util.ResourceMgr;
 
 import java.awt.*;
 
